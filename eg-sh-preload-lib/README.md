@@ -22,7 +22,15 @@ NOTE: On Mac, it's dylib (I don't think .so works)
 shared_preload_library='hello'
 ```
 
-## Step 4: Create the function
+## Step 4: Copy the shared object file to Postgres pkglibdir
+```
+[23:44:54] viggy28:pg-playground git:(main*) $ pg_config --pkglibdir                         
+/usr/local/opt/postgresql@16/lib/postgresql
+
+cp hello.dylib /usr/local/opt/postgresql@16/lib/postgresql
+```
+
+## Step 5: Create the function
 ```
 viggy28:eg-sh-preload-lib $ psql -d postgres -p 6432                                    
 psql (16.2 (Homebrew))
@@ -31,7 +39,7 @@ postgres=# create function hello() returns text as 'hello' language c;
 CREATE FUNCTION
 ```
 
-## Step 5: Invoke the function
+## Step 6: Invoke the function
 ```
 postgres=# select hello();
                hello                
