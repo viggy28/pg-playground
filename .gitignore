@@ -1,0 +1,4 @@
+# Ignore .so and .dylib files using regex
+\/*.so
+\/*.dylib
+\/*.o
